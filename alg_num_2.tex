@@ -2,7 +2,7 @@
 For this chapter, fix a prime number $p$.
 \begin{definition}
   For $x\in\mathbb Z$ write $v_p(x) = l$ iff $p^l\| x$, ie.
-  $p^l|x$ and $x^{l+1}\not\mid x$.
+  $p^l|x$ and $p^{l+1}\not\mid x$.
   Equivalently, $x\equiv 0\bmod p^l$ and $x\not\equiv 0\bmod p^{l+1}$.
 
   Now define $|x|_p := p^{-v_p(x)}$. For $a = x/y\in \mathbb Q$, define
@@ -18,7 +18,7 @@ For this chapter, fix a prime number $p$.
 \end{remark}
 \begin{lemma}
   For all $a$, $b\in \mathbb Q$ we have
-  $$|a+b|_p \le \max(|a|_p, |b|_p) \le |a+b|_p$$
+  $$|a+b|_p \le \max(|a|_p, |b|_p) \le |a|_p + |b|_p$$
   The {\em (strict) triangle inequality}.
 \end{lemma}
 \begin{proof}
@@ -44,7 +44,7 @@ $|n|_p \le 1$. The archimedian principle is that for all $x\in\mathbb R$ there
 is some $n\in \mathbb N$ s.th. $n>x$, showing $\mathbb N$ to be unbounded.
 On the other hand, $p$-adically, it is bounded.
 
-Now that we have am absolute value, we can define convergence
+Now that we have an absolute value, we can define convergence
 \begin{definition}
   Let $(a_n)\in \mathbb Q$ be a sequence and $a\in \mathbb Q$. Then
   \begin{enumerate}
@@ -85,7 +85,7 @@ One can show, in various ways, that $\mathbb Z_p$ is actually complete.
 The sequence $x_n$ converges in the $p$-adic absolute value against $x$.
 
 \begin{lemma}
-  $$\mathbb Z_p^* = \{x | |x|_p = 1\} = \{x | v_p(x) == 0$$
+  $$\mathbb Z_p^* = \{x | |x|_p = 1\} = \{x | v_p(x) = 0\}$$
 \end{lemma}
 \begin{proof}
   The neccessity is clear $xy = 1$ implies $|xy|_p = |x|_p |y|_p = |1|_p = 1$.
