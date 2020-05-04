@@ -1,0 +1,170 @@
+\def\xvec#1#2#3{#1_{#2},\ldots,#1_{#3}}
+\def\exist{\stackrel{.}{\exists}}
+\def\BIGcup{\mathop{\mkern0.5\thinmuskip
+     \stackrel{.}{\bigcup}
+     \mkern0.5\thinmuskip}}
+\def\icup{\mathop{\mkern0.5\thinmuskip
+     \stackrel{.}{\bigcup}
+     \mkern0.5\thinmuskip}}
+\def\iprod{\mathop{\mkern0.5\thinmuskip
+     \stackrel{.}{\prod}
+     \mkern0.5\thinmuskip}}
+\def\ggt{\mathop{\rm ggT}\nolimits}
+\def\vect#1{\,\underline{#1}}
+\def\vecto{\mkern2.5mu\mathop{\scriptstyle \underline{0}}\nolimits\mkern2.5mu}
+\def\gengl{\stackrel{\textstyle !}{=}}
+\def\xvect#1#2#3{\xvec {\vect {#1}}{#2}{#3}}
+\def\obda{$\rm {o.B.d.A.}$~}
+\def\Obda{$\rm {O.B.d.A.}$~}
+\def\relob#1#2{\stackrel{\rm #1}{#2}}
+\def\im{\mathop{\rm Im}\nolimits}
+\def\rg{\mathop{\rm rg}\nolimits}
+\def\gl{\mathop{\rm Gl}\nolimits}
+\def\HNF{\mathop{\rm HNF}\nolimits}
+\def\aut{\mathop{\rm Aut}\nolimits}
+\def\diag{\mathop{\rm diag}\nolimits}
+\def\fix{\mathop{\rm Fix}\nolimits}
+\def\nd{\mathrel{\triangleleft}}
+\def\xphi#1#2#3{\varphi\, (\vect {#1}_{#2}),\ldots ,\varphi\, (\vect {#1}_{#3})}
+\def\R{{\mathbb R}}
+\def\N{{\mathbb N}}
+\def\F{{\mathbb F}}
+\def\P{{\mathbb P}}
+\def\K{{\mathbb K}}
+\def\Z{{\mathbb Z}}
+\def\C{{\mathbb C}}
+\def\Q{{\mathbb Q}}
+\def\IdA{{\mathfrak a}}
+\def\IdB{{\mathfrak b}}
+\def\IdC{{\mathfrak c}}
+\def\IdD{{\mathfrak d}}
+\def\IdP{{\mathfrak p}}
+\def\IdQ{{\mathfrak q}}
+\def\IdM{{\mathfrak m}}
+\def\id{{\rm Id}}
+\def\dh{$\rm {d.h.}$~}
+\def\Dh{$\rm {D.h.}$~}
+\def\ia{$\rm {i.a.}$~}
+\def\Ia{$\rm {I.a.}$~}
+\def\konj#1{\,\overline{#1}}
+\def\aufz#1#2{#1 ,\ldots ,#2}
+\def\id{\mathop{\rm id}\nolimits}
+\def\sign{\mathop{\rm sign}\nolimits}
+\def\chr{\mathop{\rm char}\nolimits}
+\def\res{\mathop{\rm Res}\nolimits}
+\def\ker{\mathop{\rm ker}\nolimits}
+\def\adj{\mathop{\rm Adj}\nolimits}
+\def\re{\mathop{\rm Re}\nolimits}
+\def\Sp{\mathop{\rm Sp}\nolimits}
+\def\St{\mathop{\rm St}\nolimits}
+\def\Tr{\mathop{\rm Tr}\nolimits}
+\def\No{\mathop{\rm N}\nolimits}
+\def\Tor{\mathop{\rm Tor}\nolimits}
+\def\ann{\mathop{\rm Ann}\nolimits}
+\def\vol{\mathop{\rm Vol}\nolimits}
+\def\rank{\mathop{\rm rk}\nolimits}
+\def\disc{\mathop{\rm disc}\nolimits}
+\def\rad{\mathop{\rm rad}\nolimits}
+%
+\def\relun#1#2{\;\lower5pt\hbox{$\stackrel{\textstyle #1}{\scriptstyle #2}$}\;}
+\def\gl{\mathop{\rm GL}\nolimits\,}
+\def\ents{\stackrel{\wedge}{=}}
+\def\hom{\mathop{\rm Hom}\nolimits}
+\def\endo{\mathop{\rm End}\nolimits}
+\def\modulo{\mathop{\rm modulo}\nolimits}
+\def\ord{\mathop{\rm ord}\nolimits}
+\def\Cl{\mathop{\rm Cl}\nolimits}
+\def\Gl{\mathop{\rm Gl}\nolimits}
+\def\downmapsto{\mbox{\raise4pt\hbox{--}}\mkern-14.5mu\downarrow\mkern14.5mu}
+\def\produkt{\mathop{\mkern0.5\thinmuskip
+     \lower4pt\hbox{\LARGE\sf X}
+     \mkern0.5\thinmuskip}}
+\let\ggT\ggt
+\let\kgV\kgv
+\let\mod\bmod
+\def\Fq{\IF_q}
+\def\Sn{{\mathfrak S}_n}
+\def\An{{\mathfrak A}_n}
+\def\Sx#1{{\mathfrak S}_{#1}}
+\def\Ax#1{{\mathfrak A}_{#1}}
+\def\sep{{\text{sep}}}
+%
+\def\vstars{\lower 4pt \vbox{\baselineskip4\p@ \lineskiplimit\z@
+    \kern6\p@\hbox{\tiny *}\hbox{\tiny *}\hbox{\tiny *}}}
+\def\fin{{\text{\rm fin.}}}
+%
+\def\eqn#1{\begin{eqnarray}{}#1\end{eqnarray}}
+\def\setquo#1#2{{\setbox1\vbox{\hbox{$#1$}}\setbox2\vbox{\hbox{$#2$}}\raise5pt\box1 / \lower5pt\box2}}
+\def\proofname{\color{green}Beweis}
+\def\mapsfrom{\mathop{\leftarrow\hspace{-.18cm}\raise 0.70pt \hbox{$\shortmid$}}}
+\let\orgem\em
+\def\em{\color{magenta}\orgem}
+\newtheoremstyle{warning}
+  {3pt}%      Space above
+  {3pt}%      Space below
+  {\color{blue}}%         Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\color{red}\sc}% Thm head font
+  {:}%        Punctuation after thm head
+  {.5em}%     Space after thm head: " " = normal interword space;
+        %       \newline = linebreak
+  {}%         Thm head spec (can be left empty, meaning `normal')
+\newtheoremstyle{note}
+  {}%      Space above
+  {}%      Space below
+  {}%         Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\color{blue}\sc}% Thm head font
+  {:}%        Punctuation after thm head
+  {.5em}%     Space after thm head: " " = normal interword space;
+        %       \newline = linebreak
+  {}%         Thm head spec (can be left empty, meaning `normal')
+\theoremstyle{note}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{satz}[definition]{Satz}
+\newtheorem{korollar}[definition]{Corollary}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{hilfssatz}[definition]{Hilfssatz}
+\newtheorem{folgerung}[definition]{Folgerung}
+\newtheorem{bemerkung}[definition]{Bemerkung}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{algo}[definition]{Algorithmus}
+\newtheorem{notation}[definition]{Bezeichnung}
+\newtheorem{problem}[definition]{Problem}
+\newtheorem{beispiel}[definition]{Beispiel}
+\newtheorem{algorithmus}[definition]{Algorithmus}
+\def\pitem{\advance\leftskip3mm\advance\linewidth-3mm}
+\def\mitem{\advance\leftskip-3mm\advance\linewidth3mm}
+\let\olditem\item
+\makeatletter
+\def\pitem{\advance\@totalleftmargin5mm\advance\labelwidth5mm
+           \advance\linewidth-5mm\def\item{\let\item\olditem\item\relax
+    \parshape\@ne\@totalleftmargin\linewidth}}
+\def\mitem{\advance\@totalleftmargin-5mm\advance\labelwidth-5mm\relax
+           \advance\linewidth5mm\def\item{\let\item\olditem\item
+    \parshape\@ne\@totalleftmargin\linewidth}}
+\makeatother
+\def\startalgo{\def\makelabel##1{{\rm ##1}\hss}}
+
+\numberwithin{definition}{chapter}
+\theoremstyle{warning}
+\newtheorem{warnung}[definition]{Warnung}
+\definecolor{satz}{cmyk}{0,0,.1,0}
+\definecolor{definition}{cmyk}{.05,0,0,0}
+\definecolor{korollar}{cmyk}{0,.05,0,.005}
+\definecolor{hilfssatz}{cmyk}{0,.05,0.1,0}
+\def\linkcolor{[1 0 0.7]}
+\def\thedefinition{\arabic{chapter}.\arabic{definition}}
+%
+\newbox\cfbox\newdimen\cfdim\cfdim\textwidth\advance\cfdim-10pt
+\makeframe{satz}
+\makeframe{definition}
+\makeframe{korollar}
+\makeframe{hilfssatz}
+\makeframe{lemma}
+
+\newenvironment{frcseries}{\fontfamily{frc}\selectfont}{}
+\newcommand{\textfrc}[1]{{\frcseries#1}}
+\renewcommand{\mathcal}[1]{\text{\textbf{#1}}}

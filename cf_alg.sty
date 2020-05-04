@@ -1,0 +1,269 @@
+\message{Document Style by Oliver Petrik} 
+\message{Version 1 as of 16 December 1992}
+\message{Version 2 as of Oct. 1999 CF}
+\newif\ifcf@export\cf@exporttrue%\cf@exportfalse
+%\newif\ifcf@color\cf@colortrue\cf@colorfalse
+%
+\@twosidetrue
+\@mparswitchtrue
+%
+\textheight240mm
+\textwidth150mm
+\parskip0pt plus3pt
+\parindent0pt
+\marginparwidth22mm
+\marginparsep3mm
+\oddsidemargin4.6mm
+\evensidemargin4.6mm
+\topmargin-21.4mm
+\addtolength{\voffset}{+3mm}
+%
+\renewcommand{\labelenumi}{(\roman{enumi})}
+%
+\pagestyle{headings}
+%
+%
+\def\dest#1{\special{pdf:dest (#1) [ @thispage /FitH @ypos ]}}%
+\def\begincolor#1{\special{pdf:bc #1}}%
+\def\endcolor{\special{pdf:ec}}%
+\def\setlink#1{\begincolor{\linkcolor}{#1}\endcolor}
+\def\startlink#1{%
+  \special{pdf: bann 
+      << /Type /Annot /Subtype /Link /Border [ 0 0 0 ] /A << /S /GoTo /D (#1)>>
+>>}\begincolor{\linkcolor}\relax}
+\def\stoplink{\endcolor\special{pdf: eann}\relax}
+\def\link#1#2{%
+  \special{pdf: bann 
+      << /Type /Annot /Subtype /Link /Border [ 0 0 0 ] /A << /S /GoTo /D (#2)>>
+>>}\setlink{#1}\special{pdf: eann}\relax}
+\def\speciallink#1#2{%
+  \special{pdf: bann 
+      << /Type /Annot /Subtype /Link /Border [ 0 0 0 ] /A << /S /GoToR /D [#1 /XYZ null null null] /F (#2.pdf) /NewWindow true>>
+>>}\setlink{#1}\special{pdf: eann}\relax}
+%%
+\def\cf@addref#1{%
+  \let\tmp\@currentlabel%
+  \edef\@currentlabel{{#1}{\ }{\tmp}}
+}
+\let\cf@label@orig\label
+\def\speciallabel#1#2#3{\edef\@currentlabel{{#3}{\ }{#2}}\cf@label@orig{#1}%
+}
+\def\cf@name{}
+\let\cf@thm\@thm
+%
+\def\rom#1{#1}
+\def\@thm#1#2#3{% #1 stil parameter, #2 counter, #3 Name
+  \@ifnextchar[{\cf@thmb{#1}{#2}{#3}}{\cf@thma{#1}{#2}{#3}}
+}
+\def\cf@thma#1#2#3{%
+  \cf@thm{#1}{#2}{#3}%
+  \def\cf@name{#3}%
+  \global\let\cf@number\@currentlabel%
+  \cf@addref{#3}%
+}
+\def\cf@thmb#1#2#3[#4]{
+  \cf@thm{#1}{#2}{#3}[#4]
+  \def\cf@name{#3}
+  \global\let\cf@number\@currentlabel
+  \cf@addref{#3}
+}
+\DeclareFontFamily{OT1}{yfrak}{}
+\DeclareFontShape{OT1}{yfrak}{m}{n}{%
+  <-9> yfrak
+%     <5> <6> <7> <8> <9> gen * cmr
+   <10-> yfrak
+  }{}
+\DeclareMathAlphabet{\mathyfrak}{OT1}{yfrak}{m}{n}
+\def\yfrakfam{\usefont{OT1}{yfrak}{m}{n}}
+\DeclareTextFontCommand{\textyfrak}{\yfrakfam}
+\let\cal\mathcal
+\let\Bbb\mathbb
+\let\goth\mathfrak
+\let\frak\mathfrak
+\let\yfrak\mathyfrak
+\def\cftt{\tt\fontsize{8pt}{\baselineskip}\selectfont}
+
+\def\cf@car#1#2\@nil{#1}
+\def\cf@cdr#1#2\@nil{#2}
+\def\cf@cer#1#2#3\@nil{#3}
+\def\cf@cfr#1#2#3#4\@nil{#4}
+\def\cf@neu#1#2\@nil{\cf@cfr#1\relax\relax\relax\relax\@nil}
+%
+\def\cf@getfourth#1{% #1 = {{{name}{...}{number}{fourth}}{page}} -> fourth
+  \edef\cf@tempa{\cf@car#1\relax\@nil}%
+  \edef\cf@tempb{\expandafter\cf@car\cf@tempa\relax\@nil}%
+   \expandafter\cf@cfr\cf@tempb\relax\relax\relax\relax\@nil%
+}
+\def\cf@getnumber#1{% #1 = {{{name}{...}{number}{...}}{page}} -> number
+  \edef\cf@tempa{\cf@car#1\@nil}%
+  \edef\cf@tempb{\expandafter\cf@car\cf@tempa\@nil}%
+   \expandafter\cf@cer\cf@tempb\relax\relax\@nil%
+}
+\def\cf@getname#1{% #1 = {{{name}{...}{number}{...}}{page}} -> name
+  \edef\cf@tempa{\cf@car#1\@nil}%
+  \edef\cf@tempb{\expandafter\cf@car\cf@tempa\@nil}%
+  \expandafter\cf@car\cf@tempb\relax\@nil%
+}
+\def\cf@assertref#1{%
+  \@ifundefined{r@#1}{{\reset@font\bf ??}\@warning
+   {Reference `#1' on page \thepage \space
+    undefined}}{}%
+}
+\def\ref#1{\startlink{#1}%
+  \expandafter\@setref\csname r@#1\endcsname\@firstoftwo{#1}\stoplink}
+\def\numberref#1{%
+  \cf@assertref{#1}%
+    \edef\@tempa{\@nameuse{r@#1}}%
+    \startlink{#1}%
+    \rom{\expandafter\cf@getnumber{\@tempa}}%
+    \stoplink
+}
+\def\nameref#1{%
+  \cf@assertref{#1}%
+    \edef\@tempa{\@nameuse{r@#1}}%
+    \rom{\expandafter\cf@getname{\@tempa}}%
+}
+%
+\def\listref#1{%
+  \cf@assertref{#1}%
+  \rom{\expandafter\expandafter\expandafter\cf@neu\csname r@#1\endcsname\relax\@nil}%
+}
+\def\listlabel#1{%
+\let\tmp\@currentlabel%
+\let\@tempa\protect\def\protect{\noexpand\protect\noexpand}%
+\edef\@currentlabel{{\cf@name}{\ }{\cf@number.}{(\tmp})}%
+\let\protect\@tempa%
+\label{#1}
+}
+\def\proglabel#1{%
+  \edef\@currentlabel{{\cf@name}{\ }{\cf@number.}{(\the\cftoks)}}%
+  \label{#1}%
+}
+%
+%
+\let\cf@label\label
+\newif\ifcfstart\cfstarttrue
+\ifcf@export
+  \def\cflabel#1{\relax}
+  \def\label#1{\dest{#1}\cf@label{#1}}
+\else
+  \def\label#1{\cf@label{#1}{\expandafter\let\csname #1\endcsname\relax
+     \def\sd{\dp\strutbox}\cftt\dest{#1}\relax
+     \strut\vadjust{\kern-\sd\vtop to\sd{\baselineskip\sd\vss%
+     \llap{\expandafter\string\csname #1\endcsname\ }\relax}}}\ignorespaces}
+  \def\cflabel#1{\noalign{\expandafter\let\csname #1\endcsname\relax
+     \setbox1\vbox{\llap{\cftt\expandafter\string\csname #1\endcsname\ }}
+     \dp1=0pt\ht1=0pt\wd1=0pt\box1\vskip-1cm}\nonumber\\}
+\fi
+%
+%
+\parindent0pt\parskip7pt plus 14pt minus 2pt
+\normalparindent0pt\headheight7.9pt
+\listparindent0pt
+%
+%
+\def\labelenumi{(\arabic{enumi})}
+\numberwithin{equation}{chapter}
+\def\theequation{\arabic{chapter}-\arabic{equation}}
+\setcounter{tocdepth}{2}
+%
+%
+%
+\newtoks\cftoks
+\def\pitem{\@ifnextchar[\cfpitema\cfpitemb}
+\def\cfpitemfinish{\advance\leftskip3mm\advance\linewidth-3mm}
+\def\cfpitema[#1]{\item[#1]\cfpitemfinish}
+\def\cfpitemb{\item\cfpitemfinish}
+%
+\def\mitem{\@ifnextchar[\cfmitema\cfmitemb}
+\def\cfmitemfinish{\advance\leftskip-3mm\advance\linewidth3mm}
+\def\cfmitema[#1]{\item[#1]\cfmitemfinish}
+\def\cfmitemb{\item\cfmitemfinish}
+%
+\def\prog{\leavevmode\begin{list}{}{%
+  \itemindent0pt\listparindent0mm\parsep2mm\itemsep3mm
+  \leftmargin3mm
+  \topsep0pt\labelwidth0pt\labelsep3mm
+  \renewcommand{\makelabel}[1]{\ifx##1\@itemlabel\else{{\em(##1): }}%
+   \global\cftoks{##1}\fi}
+  \let\listlabel\proglabel
+}}
+\def\endprog{\end{list}}
+%
+%
+%
+\def\Marz{M"arz}
+%
+%
+\def\fieldPoly#1#2{%
+          \vbox{\hrule\hbox to \textwidth{%
+          \parbox{2.5cm}{\hskip 3pt$#1$\hskip 0pt plus 1 fill}\vrule
+          \hskip 3pt\parbox{\fieldrest}{\strutupper$#2$\strutlower\hskip 0pt plus 1 fill}\hskip 3pt}
+          \hrule}}
+\def\fieldRest#1{%
+          \vbox{\hbox to \textwidth{%
+          \hskip 3pt\parbox{\fieldtotal}{\strutupper#1\strutlower\hskip 0pt plus 1 fill}\hskip3pt}
+          \hrule}}
+\def\fieldBasis#1#2{%
+          \vbox{\hbox to \textwidth{%
+          \hskip 3pt\parbox{\fieldhalf}{\strutupper$#1$\strutlower\hskip 0pt plus 1fill}\hskip3pt
+          \vrule
+          \hskip 3pt\parbox{\fieldhalf}{\strutupper$#2$\strutlower\hskip 0pt plus 1fill}\hskip3pt}
+          \hrule}}
+\def\field{\vskip\parskip%
+  \hbox \bgroup\newbox\strutboxupper\newbox\strutboxlower%
+               \setbox\strutboxupper\hbox{\vrule height 12pt depth0pt width0pt}%
+               \setbox\strutboxlower\hbox{\vrule height 0pt depth7pt width0pt}%
+               \def\strutupper{\unhcopy\strutboxupper}%
+               \def\strutlower{\unhcopy\strutboxlower}%
+               \setbox\strutbox\hbox{\vrule height 12pt depth7pt width0pt}%
+               \newdimen\fieldrest\newdimen\fieldtotal\newdimen\fieldhalf%
+               \fieldrest\textwidth\fieldtotal\textwidth%
+               \advance \fieldrest by -2.5cm%
+               \advance \fieldrest by -6pt%
+               \advance \fieldtotal by -6pt%
+               \fieldhalf\fieldtotal%
+               \divide\fieldhalf by 2%
+               \advance \fieldhalf by -3pt%
+    \offinterlineskip\vrule\vbox\bgroup}
+\def\endfield{\egroup\vrule\egroup}
+%
+%
+\def\eql#1#2{\begin{eqnarray}\cflabel{#1}\relax#2\cf@label{#1}\end{eqnarray}}
+\ifcf@color
+ \def\bcolor#1{\@ifundefined{\string\color @#1}{\color{black}}{\color{#1}}}
+ \def\wcolor#1{\@ifundefined{\string\color @#1}{\color{white}}{\color{#1}}}
+ \def\background#1#2{{\wcolor{#1}\hrule height \ht#2 depth \dp#2 width \wd#2
+ }% 
+ \vskip-\ht#2
+ \vskip-\dp#2
+ \vskip-\fboxrule
+ \vskip-\fboxrule
+ \vskip-\fboxsep
+ \vskip-\fboxsep
+ \usebox#2
+ }
+\else
+  \def\bcolor#1{\orgcolor{black}}
+  \def\wcolor#1{\orgcolor{white}}
+  \let\orgcolor\color
+  \def\background#1#2{\usebox#2}
+  \def\color#1{\relax}
+\fi
+\def\cfgobble;{\relax}
+\def\cfxt#1,{\link{#1}{#1}\@ifnextchar;\cfgobble{, \cfxt}}
+\def\cfxref#1{\cfxt#1,;}
+\def\cfitem #1,{\par\hangindent 30pt\link{#1}{#1}, }
+%\def\special#1{\relax}
+\newbox\cfbox\newdimen\cfdim\cfdim\textwidth\advance\cfdim-7pt
+\def\makeframe#1{%
+\expandafter\let\expandafter\dummy\csname #1\endcsname
+\expandafter\let\csname org#1\endcsname\dummy
+\expandafter\let\expandafter\dummy\csname end#1\endcsname
+\expandafter\let\csname orgend#1\endcsname\dummy
+\expandafter\def\csname #1\endcsname{\setbox\cfbox\hbox{\ifnum0=`}\fi\begin{minipage}{\cfdim}\csname org#1\endcsname}
+\expandafter\def\csname end#1\endcsname{\csname orgend#1\endcsname\end{minipage}\ifnum0=`{\fi}\par%
+\vbox{\setbox\cfbox\hbox{\fbox{\usebox\cfbox}}%
+\background{#1}{\cfbox}
+}\par}
+}

@@ -1,0 +1,210 @@
+\chapter{$\mathbb Q_p$}
+For this chapter, fix a prime number $p$.
+\begin{definition}
+  For $x\in\mathbb Z$ write $v_p(x) = l$ iff $p^l\| x$, ie.
+  $p^l|x$ and $x^{l+1}\not\mid x$.
+  Equivalently, $x\equiv 0\bmod p^l$ and $x\not\equiv 0\bmod p^{l+1}$.
+
+  Now define $|x|_p := p^{-v_p(x)}$. For $a = x/y\in \mathbb Q$, define
+  $v_p(a) := v_p(x) - v_p(y)$ and $|a|_p := |x|_p/|y|_p$
+\end{definition}
+\begin{remark}
+  \begin{enumerate}
+    \item $v_p$ and $|.|_p$ are well defined on $\mathbb Q$
+    \item $|0|_p := 0$, $v_p(0) := \infty$
+    \item $|ab|_p = |a|_p |b|_b$ for all $a$, $b\in \mathbb Q$
+    \item $|a|_p = 0$ iff $a=0$
+  \end{enumerate}
+\end{remark}
+\begin{lemma}
+  For all $a$, $b\in \mathbb Q$ we have
+  $$|a+b|_p \le \max(|a|_p, |b|_p) \le |a+b|_p$$
+  The {\em (strict) triangle inequality}.
+\end{lemma}
+\begin{proof}
+  For $a$, $b\in \mathbb Z$, this is obvious from the divisibility:
+  $v_p(a) = k$, $v_p(b) = l$, then $a\equiv 0 \bmod p^k$, $b\equiv 0 \bmod p^l$, so clearly $a+b \equiv 0 \bmod p^{\min(l, k)}$
+  For $a$, $b\in \mathbb Q$, we can clear denominators (multiply by a
+  (large) integer)...
+\end{proof}
+\begin{remark}
+  This shows that $|.|_p$ is an {\em absolute value} on $\mathbb Q$:
+  \begin{enumerate}
+    \item $|a|_p \ge 0$ and $|a|_p = 0$ iff $a=0$
+    \item $|ab|_p = |a|_p |b|_p$
+    \item $|a+b|_p \le |a|_p + |b|_p$
+  \end{enumerate}
+  in fact it is even a {\em non-archimedian} or {\em ultra-metric}
+  absolute value as we have the stronger condition
+  $$|a+b|_p \le \max(|a|_p. |b|_p)$$
+  This is called the $p$-adic absolute value.
+\end{remark}
+It is called non-archimedian since for all $n\in \mathbb N$ we have
+$|n|_p \le 1$. The archimedian principle is that for all $x\in\mathbb R$ there
+is some $n\in \mathbb N$ s.th. $n>x$, showing $\mathbb N$ to be unbounded.
+On the other hand, $p$-adically, it is bounded.
+
+Now that we have am absolute value, we can define convergence
+\begin{definition}
+  Let $(a_n)\in \mathbb Q$ be a sequence and $a\in \mathbb Q$. Then
+  \begin{enumerate}
+     \item $(a_n)_n$ is called {\em Cauchy-sequence} iff
+       $$\forall \epsilon >0 \exists N, \forall m,n>N: |a_n-a_m|_p\le \epsilon$$
+     \item $(a_n)_n$ convereges to $a$, $a = \lim_{n\to\infty} a_n$ iff
+       $$\forall \epsilon>0\exists N, \forall n>N: |a-a_n|_p\le \epsilon$$
+  \end{enumerate}
+\end{definition}
+The usual theorems for sum, products, ... hold. Clearly
+any converging sequence is Cauchy, but not the other way.
+In the same way thar $\mathbb R$ is the completion of $\mathbb Q$ wrt the usual
+absolute value $|.|$, $\mathbb Q_p$ is the completion wrt $|.|_p$
+
+\begin{definition}
+  Let $A_n := \mathbb Z/p^n\mathbb Z$, then we have an infinite
+  exact sequence
+  $$\ldots A_n \to A_{n-1} \to \ldots \to A_1$$
+  This is called a projective system with projections 
+  $$\phi_n:A_n \to A_{n-1}$$
+
+  We define 
+  $$\mathbb Z_p := \{ (x_n)_n \in \prod_n A_n \mid \phi_n(x_n) = x_{n-1}\}$$
+  As the $\phi_n$ are homomorphisms, $\mathbb Z_p$ is a ring.
+  $\mathbb Z \hookrightarrow \mathbb Z_p: x \mapsto (x \bmod p^n)_n$.
+
+  We extend $|.|_p$ to $\mathbb Z_p$ via
+  $$|(x_n)_n|_p := p^{-k}$$
+  where $k$ is maximal s.th. $x_l = 0$ for all $l\le k$.
+\end{definition}
+
+For $x = (x_n)_n\in \mathbb Z_p$, write the $x_n$ in base $p$:
+$$x_n = \sum_{i=0}^{n-1} a_{n,i} p^i $$
+for $0\le a_{n,i}<p$, then the $\phi_n$ enforce that
+$a_{n, i} = a_{n+l, i}$ for all $l\ge 0$, so, by a slight abuse
+$$x = \sum_{i=0}^\infty a_i p^i$$
+One can show, in various ways, that $\mathbb Z_p$ is actually complete.
+The sequence $x_n$ converges in the $p$-adic absolute value against $x$.
+
+\begin{lemma}
+  $$\mathbb Z_p^* = \{x | |x|_p = 1\} = \{x | v_p(x) == 0$$
+\end{lemma}
+\begin{proof}
+  The neccessity is clear $xy = 1$ implies $|xy|_p = |x|_p |y|_p = |1|_p = 1$.
+  From the definition it is clear that $|.|_p:\mathbb Z_p \to \mathbb Q$ 
+  only has values $\le 1$.
+
+  If $|x|_p = 1$, then $v_p(x_1) = 0$, so we can find $y_1$ s.th.
+  $x_1y_1 \equiv 1 \bmod p$. Since $\phi_2(x_2) = x_1$, $v_p(x_2) = 0$ as well,
+  so $y_2x_2 \equiv 1\bmod p^2$ and you can see $\phi_2(y_2) = y_1$ as $y_1$ is
+  unique modulo $p$.
+
+  Continuing we get $y_n$ and $(y_n)_n\in \mathbb Z_p$ is the inverse.
+\end{proof}
+
+Thus for any $a/b\in\mathbb Q$ s.th. $p\not\mid b$ we can invert $b$ in $\mathbb Z_p$ and thus have $a/b\in\mathbb Z_p$ as well.
+
+We now obtain $\mathbb Q_p$ as the field of fractions of $\mathbb Z_p$.
+Thus all $a/b\in\mathbb Q_p$ can be written as $p^k x$ for some $x\in \mathbb Z_p$. By requiring $x$ to be a unit, $k$ is unique as well.
+
+\begin{lemma}[Newton - part 1]
+  Let $f\in \mathbb Z_p[t]$ and $a\in \mathbb Z_p$ be such
+  \begin{enumerate}
+    \item $f(a) \equiv 0\bmod p$ (or $|f(a)|_p\le 1/p$)
+    \item $f'(a) \not\equiv 0\bmod p$ (or $|f'(a)|_p = 1)$
+  \end{enumerate}
+  Then there exists $b\in\mathbb Z_p$ s.th.
+  \begin{enumerate}
+    \item $f(b) = 0$
+    \item $a\equiv b\bmod p$ or $|a-b|_p\le 1/p$
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  We show s.th. slighly different:
+  if $f(a) \equiv 0 \bmod p^k$, $f'(a) \not\equiv 0\bmod p$, then setting
+  $b := a-f(a)/f'(a)$ gives
+  $a\equiv b\bmod p^k$, $f(b) \equiv 0 \bmod p^{2k}$.
+  Iterating this gives the result.
+
+  Taylor:
+  \begin{eqnarray*}
+    f(a+h) &=& f(a) + hf'(a) + \sum_{i=2}^\infty\frac{h^i}{i!}f^{(i)}(a) \\
+           &=& f(a) + hf'(a) + h^2\sum_{i=2}^\infty\frac{h^{i-2}}{i!}f^{(i)}(a)\\
+           &=& f(a) + hf'(a) + h^2 R(h, a)
+  \end{eqnarray*}
+  where $R(h, a) \in \mathbb Q_p[h, a]$ initially. Sorting terms
+  $$h^2 R(h, a) = f(a+h) - f(a) -hf'(a)$$
+  using Gauss-Lemma for $\mathbb Z_p$, we see that $R\in\mathbb Z_p[h,a]$.
+
+  Now back to the task:
+  \begin{eqnarray*}
+    f(b) &=& f(a-f(a)/f'(a))\\
+         &=& f(a) -(f(a)/f'(a)) f'(a) + (f(a)/f'(a))^2R()\\
+         &\equiv& 0 \bmod p^{2k}
+  \end{eqnarray*}
+
+\end{proof}
+
+\begin{beispiel}
+  $a\in \mathbb Z$ s.th. $a\equiv b^2\bmod p$, $p>2$, then
+  there is some $c\in\mathbb Z_p$ s.th. $c^2 = a$.
+
+  Follows directly from above.
+
+  This means that $\mathbb Z_p$ is actually fairly large, e.g.
+  $\sqrt 2\in \mathbb Z_3$...
+\end{beispiel}
+
+\chapter{Forms over $\mathbb Q_p$}
+\section{Intro}
+\def\legendre#1#2{\left(\frac{#1}{#2}\right)}
+\begin{definition}[Legendre Symbol]
+Let $p\ne2$ be a prime number and $x\in \mathbb F_p^*$, then
+$$\legendre x p := x^{(p-1)/2}$$
+For $x=0$, define $\legendre 0 p := 0$, for $x\in \mathbb Z$
+define via the projection down to $\pi:\mathbb Z \to \mathbb F_p$:
+$\legendre x p := \legendre{\pi(x)} p$
+\end{definition}
+
+\begin{remark}
+$$\legendre x p \legendre y p = \legendre{xy} p$$
+and
+$\legendre x p = 1$ iff $x$ is a square in $\mathbb F_p$.
+\end{remark}
+\begin{theorem}
+Define for odd $n\in \Z$ functions 
+$$\epsilon(n) := \frac{n-1} 2 \bmod 2 = \begin{cases} 0 & n\equiv 1 \bmod 4\\
+                                                      1 & n \equiv -1 \bmod 4
+                                                      \end{cases}$$
+and
+$$\omega(n) := \frac{n^2-1} 8 \bmod 2 = \begin{cases} 0 & n \equiv \pm 1 \bmod 8\\
+                                                      1 & n \equiv \pm 5 \bmod 8
+                                                      \end{cases}$$
+Then $\epsilon$ and $\omega$ induce homomorphisms:
+$$\epsilon : (\mathbb Z/4\mathbb Z)^* \to \mathbb F_2\quad\text{and}\quad
+\omega: (\mathbb Z/8\mathbb Z)^* \to \mathbb F_2$$
+Furthermore, 
+$$\legendre 1 p = 1, \legendre{-1} p = (-1)^{\epsilon(p)}, \legendre 2 p = (-1)^{\omega(p)}$$
+\end{theorem}
+\begin{theorem}[Gau\ss, Quadratic Reciprocity]
+Let $l\ne p$ be primes, then 
+$$\legendre l p = \legendre p l (-1)^{\epsilon(p)\epsilon(l)}$$
+\end{theorem}
+Remark:
+\begin{enumerate}
+  \item Let $n$ be odd, $n=\prod p_i^{n_i}$ the factorisation and $x\in\mathbb Z$, then
+    $$\legendre x n := \prod \legendre x {p_i} ^{n_i}$$
+    is the {\em Jacobi-symbol}
+  \item For $x$, $y$ odd, quadratic reciprocity still works:
+    $$\legendre x y = \legendre y x (-1)^{\epsilon(x)\epsilon(y)}$$
+  \item Furthermore 
+    $$\legendre x y = \legendre{x\bmod y} y$$
+\end{enumerate}
+This allows for fast and easy evaluation of the Legendre symbol.
+Note, that in general (ie. $y$ not prime) $\legendre x y = 1$ does {\em not}
+imply that $x$ is a square modulo $y$. Also, still, this holds for {\em odd}
+numbers.
+For $2$ and $-1$ we have the {\em supplements}
+$$\legendre {-1} n = (-1)^{\epsilon(n)}\quad\text{and}\quad\legendre 2 n = (-1)^{\omega(n)}$$
+\begin{remark}
+Computation via Jacobi:
+  $$\legendre{29}{43} = \legendre{43}{29} = \legendre{14}{29} = \legendre 2{29}\legendre 7{29} = - \legendre 7{29} = -\legendre{29} 7 = -\legendre 1 7 = -1$$
+\end{remark}

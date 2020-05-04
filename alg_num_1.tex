@@ -1,0 +1,402 @@
+\chapter{Intro}
+\chapter{Quadratic Forms over $\mathbb Q$}
+\section{Introduction}
+
+\begin{definition}
+Let $k$ be a field, $\chr k\ne 2$, $V$ a finite dimensional $K$-vector space and
+$Q: V\to k$ a map. $Q$ is called {\em quadratic form} iff
+\begin{enumerate}
+\item $Q(av) = a^2Q(v)$ for all $v\in V$ and $a in k$
+\item $B: V\times V \to k: (x,y) \mapsto \frac 1 2(Q(x+y) - Q(x)-Q(y)$
+  is a bilnear form.
+\end{enumerate}
+\end{definition}
+Remark: there is a bijection between bilinear symmetric forms and quadratic
+forms via $Q(x) = B(x,x)$, $B$ is called the scalar product associated to 
+$Q$, the pair $(V, Q)$ is called a {\em quadratic space}
+
+\begin{definition}
+Let $(V, Q)$ and $(U, T)$ be quadratic spaces over the same field $k$.
+$f\in \hom(V, U)$ is called {\em isometry} iff $T(f(x)) = Q(x)$ for all $x\in V$
+\end{definition}
+\begin{remark}
+Let $(e_i)_i$ be a basis for $V$, then the quadratic form $A$ has an
+associated matrix $A = (a_{i,j})_{i,j}$ as $a_{i,j} = B(e_i, e_j)$.
+$A$ is called the {\em Gram}-matrix for $Q$, $A$ is symmetric.
+
+On the other hand, every symmetric matrix $A\in k^{n\times n}$ defines
+a quadratic form on $k^n$ via $Q(x) = x^t A x$
+\end{remark}
+
+\begin{lemma}
+Let $(V, Q)$ be a quadratic space, $(e_i)_i$ and $(f_i)_i$ $k$-bases
+for $V$, $A = (B(e_i, e_j))_{i,j}$ and $C = (B(f_i, f_j))_{i,j}$ the
+Gram matrices and $T\in \Gl(n, k)$ the transformation matrix, ie.
+$(e_1, \ldots, e_n)T = (f_1, \ldots, f_n)$, then
+$TAT^t = B$, hence $\disc Q := \det A k^2\in k/k^2$ is
+well defined (here, $k^2 = \{x^2: x in k\}$, technically we should use
+$k^*/\{x^2 : x in k^*\} \cup 0$ instead, then this is almost a proper
+quotient group)
+\end{lemma}
+Remark: $\disc Q$ is defined modulo squares only!
+
+\begin{definition}
+Let $(V, Q)$ be a qudratic space, $x, y\in V$ are called orthogonal iff $B(x, y) = 0$.
+Let $H\subseteq V$, then
+$H^\circ = H^\perp = \{v\in V:B(v, H) =\{0\}\}$.
+
+Two subspaces $U_1$, $U_2$ are called orthogonal iff
+$U_1\subseteq U_2^\perp$ (this implies also $U_2\subseteq U_1^\perp$)
+$V^\perp =\rad V$ is called the {\em radical} of $V$.
+$(V, Q)$ is called {\em non-degenerate} iff $V^\perp = \{0\}$.
+the {\em rank} of $Q$: $\rank Q := n-\dim V^\perp$
+\end{definition}
+
+\begin{remark}
+For all set $H$, $H^\perp$ is a sub-space. $Q$ is degenerate iff
+$\disc Q = 0$
+\end{remark}
+
+\begin{remark}\label{1.7}
+Let $U \le V$ be a subspace and $U^* = \hom(U, k)$ the usual dual space. Let
+$$q_U: V\to U^*: v\mapsto (U\to k: u\mapsto B(u, v))$$
+Then $\ker q_U = U^\perp$ and $Q$ is non-degenerate iff $q_V$ is an isomorphism
+\end{remark}
+
+\begin{definition}
+Let $(U_i)_i$ be subspaces of $V$. $V$ is called the orthogonal
+direct sum of the $U_i$ iff $U_i \subseteq U_j^\perp$ for all $i\ne j$ and
+if $V = \oplus U_i$ is a direct sum. We write $V = \hat\oplus U_i$ in that 
+case
+\end{definition}
+
+\begin{remark}
+If $V = \hat\oplus U_i$, then $Q = \sum Q_i$ for
+$Q_i := Q|_{U_i}$.
+
+On the other hand, any family $(U_i, Q_i)$ of quadratic spaces can be used to define a quadratic form $Q: \times U_i \to k: (x_i)_i \mapsto \sum Q_i(x_i)$
+on the (cartesian) product of the $U_i$.
+\end{remark}
+
+\begin{proposition}
+Let $V = U \oplus \rad V$, then $V = U \hat\oplus \rad V$ as well.
+\end{proposition}
+\begin{proposition}
+Suppose $(V, Q)$ is non-degenerate, then
+\begin{enumerate}
+\item every isometry $V\to V'$ is injective
+\item for all $U\le V$ we have
+$$(U^\perp)^\perp = U, \dim U + \dim U^\perp =\dim V$$
+and $\rad U = \rad U^\perp = U \cap U^\perp$.
+The space $(U, Q|_U)$ is non-degenerate iff $(U^\perp, Q|_{U^\perp})$
+is non-degenerate.
+\item if $V = U_1 \hat\oplus U_2$, then $U_1$, $U_2$ are non-degenerate.
+\end{enumerate}
+\end{proposition}
+
+\begin{definition}
+$x\in V$ is called isotropic iff $Q(x) = 0$. $U\subset V$ is called
+isotropic if all $u\in U$ are isotropic.
+In general, the set of isotropic vectors is not a subspace!
+\end{definition}
+
+\begin{remark}
+$U\subset V$ is isotropic iff $U\subseteq U^\perp$ iff $Q|_U = 0$
+\end{remark}
+\begin{definition}
+Let $x, y$ be isotropic and $B(x,y)\ne 0$, then $\langle x, y\rangle$
+is called a {\em hyperbolic plane}
+\end{definition}
+
+\begin{remark}
+Let $\langle x, y\rangle$ be a hyperbolic plane, then setting
+$c := B(x,y)$ and replacing $y := (1/c)y$ we can wlog assume $B(x,y) = 1$.
+The Gram matrix for the plane then becomes $(01)(10)$ of discriminant
+$-1$. So this is non-degenerate.
+\end{remark}
+
+\begin{proposition}
+Let $x\ne 0$ be isotropic, then we can find $y$ s.th. $\langle x, y\rangle$ is
+a hyperbolic plane
+\end{proposition}
+
+\begin{korollar}
+If $(V, Q)$ is non-degenerate and $0\ne x$ is isotropic, then $Q$ is surjective
+\end{korollar}
+
+\begin{definition}
+A basis $(e_i)_i$ for $V$ is called {\em orthogonal basis} iff
+$V = \hat\oplus ke_i$ iff $B(e_i, e_j) = 0$ for all $i\ne j$ iff
+the Gram matrix is diagonal
+\end{definition}
+
+\begin{theorem}
+Every quadratic space admits an orthogonal basis.
+\end{theorem}
+Remark: since we have isotropic vectors, the Gram-Schmidt procedure may run into
+difficulties
+
+\begin{lemma}\label{1.20}
+Let $x, y\in V$. Then $\langle x, y\rangle$ is a non-degenerate plane
+(ie. 2-dimensional with non-trivial form) iff $Q(x)Q(y) - B(x,y)^2\ne 0$
+\end{lemma}
+
+\begin{lemma}\label{1.21}
+Let $(V, Q)$ be non-degenerate of $\dim V\ge 3$,
+$U = \langle e_1, e_2\rangle$ and $W = \langle f_1, f_2\rangle$ two 2-dimensional subspaces s.th.
+$B(e_1, e_2) = B(f_1, f_2) = 0$ and $Q(e_1)Q(f_i)\ne 0$, $Q(e_1)Q(f_i) - B(e_1, f_i)^2 = 0$ for $i=1,2$. Then
+we can find $x\in k$ s.th. $e_x := f_1+xf_2$ is non-isotropic and
+$P = \langle e_1, e_x\rangle$ is a non-degenerate plane.
+\end{lemma}
+
+\begin{proof}
+By \ref{1.20} is $P$ a non-degenerate plane iff
+$$Q(e_1)Q(e_x) - B(e_1, e_x)^2 \ne 0$$
+
+Note:
+$$Q(e_x) = B(f_1 + xf_2, f_1+xf_2) = Q(f_1) + x^2Q(f_2) + 2xB(f_1, f_2) = Q(f_1) + x^2Q(f_2)$$
+Expanding further
+$$Q(e_1)Q(e_x) - (B(e_1, f_1) + xB(e_1, f_2))^2 =
+  Q(e_1)Q(f_1) + x^2Q(e_1)Q(f_2) -B(e_1, f_1)^2 -x^2B(e_1, f_2)^2 - 2xB(e_1, f_1)B(e_1, f_2)$$
+  and sorting
+$$=Q(e_1)Q(f_1) -B(e_1, f_1)^2  + x^2(Q(e_1)Q(f_2) - B(e_1, f_2)^2) - 2xB(e_1, f_1)B(e_1, f_2)$$
+using the conditons
+$$=- 2xB(e_1, f_1)B(e_1, f_2)$$
+so $x\ne 0$
+
+We have $Q(e_x) = Q(f_1) + x^2Q(f_2)$, so $e_x$ is non-isotropic iff
+$x^2 \ne -Q(f_1)/Q(f_2)$. In total, $x$ needs to be chosen to
+avoid at most three values, so if $|k|>3$ we're done.
+If $k=\mathbb F_3$, then $x^2 = 0, 1$ are the only possiblities for squares,
+so $Q(e_1)Q(f_i) - B(e_1, f_i)^2 = 0$ becomes $Q(e_1)Q(f_i) = 1$, hence
+$Q(f_1)/Q(f_2) = 1$ and $x=1$ works.
+\end{proof}
+
+\begin{definition}
+Two orthogonal bases are called {\em contiguous} if they share at least one
+element.
+\end{definition}
+
+\begin{theorem}
+Let $(V, Q)$ be non-degenerate, $\dim V>2$ and $(e_i)_i$ and
+$(f_i)_i$ be orthogonal bases. Then there exists a finite sequence of
+contiguous orthogonal bases linking $e_i$ and $f_i$
+\end{theorem}
+\begin{proof}
+  We distinguish three cases:
+  1) $Q(e_1)Q(f_1)-B(e_1, f_1)^2\ne 0$
+  Then, by \ref{1.20}, $P = \langle e_1, f_1\rangle$ is non-degenerate.
+  So we can find $\epsilon_2, \epsilon_2'$ s.th.
+  $P = ke_1 \hat\oplus k\epsilon_2 = kf_1 \hat\oplus k\epsilon_2'$. Now
+  $H := P^\perp$. Since $P$ and $Q$ are non-degenerate, so $H$ is as well, thus
+  $V = P \hat\oplus H$. Now let $g_3$, $\ldots$, $g_n$ be an orthogonal basis
+  for $H$, then we have
+  $(e_1, \ldots, e_n) \to (e_1, \epsilon_2, g_3, \ldots, g_n) \to (f_1, \epsilon_2', g_3, \ldots, g_n) \to (f_1, \ldots, f_n)$
+  is a chain of contiguous bases.
+
+  2) $Q(e_1)Q(f_2)-B(e_1, f_2)^2\ne 0$
+  as above
+
+  3) both are $0$. Using \ref{1.21} we find $e_x$ s.th.
+  $\langle e_1, e_x\rangle$ is non-degenerate and $e_x = f_1 + xf_2$ is non
+  isotropic. So we can find $\epsilon_2''$ s.th.
+  $P_2 := f_1 \hat\oplus f_2 = e_x \hat\oplus \epsilon_2''$
+  Now we can use 1):
+  Let $P_1 =\langle e_1, e_x\rangle$ then $\epsilon_2$ is a generator
+  for the orthogonal complement of $e_1$ in $P_1$, 
+  $\epsilon_2'$ a generator for the complement of $e_x$ in $P_1$. Further, fix any orthagonal
+  basis for $P_1^\perp$
+  Starting with $(e_1, \ldots, e_n)$ we move to
+  $(e_1, \epsilon_2) \hat\oplus P_1^\perp \to (e_x, \epsilon_2') \hat\oplus P_1^\perp \to (e_x, \epsilon_2'') \hat\oplus P_2^\perp \to (f_1, f_2) \hat\oplus P_2^\perp \to (f_1, \ldots, f_n)$
+\end{proof}
+
+\begin{lemma}\label{1.24}
+  Let $(V, Q)$ and $(V', Q')$ be non-degenerate quadratic spaces and
+  $U\le V$ be a degenerate subspace. Then any injective isometry
+  $s: U\to V'$ can be extended to a subspace $U<U_1$ where $\dim U_1 = 1+\dim U$
+\end{lemma}
+\begin{proof}
+  Let $0\ne x\in \rad U$ and $l\in\hom(U, k) = U^*$ s.th.
+  $l(x) =1$ (since $x\ne 0$ there has to be such a form).
+  By \ref{1.7}, since $V$ is non-degenerate and there is a $v\in V$ s.th.
+  $l(x) = B(x, v)$ for all $x \in U$. Set $y = v-1/2Q(v)x$ we get
+  \begin{itemize}
+    \item $Q(y) = 0$: $Q(y) = Q(v-1/2Q(v)x) = Q(v) +1/4Q(v)^2Q(x) -Q(v)B(v, x) = 0$ (since $Q(x) = 0$ and $B(v, x) = l(x) = 1$)
+    \item $l(t) = B(t, y)$ for all $t\in U$:
+      $B(t, y) = B(t, v-1/2Q(v)x) = B(t, v) - 1/2Q(v)B(t, x) = l(t)$
+      (since $B(t, v) = l(t)$ on $U$ and $U$ is isotropic, hence all is zero)
+  \end{itemize}
+  Set $U_1 = U \oplus ky$.
+
+  Now let $U' = s(U)$, then $s(x) =: x` \in U'$, $l' := l \circ s^{-1}$
+  satisfies $l'(x') = l\circ s^{-1}(s(x)) = l(x) = 1$, so \ref{1.7}
+  again find $v'$ and then $y'$ s.th. $l'(t) = B(t, y')$.
+
+  Now $s_1:U \oplus yk \to U' \oplus y'k$, where $s_1|U = s$ and
+  $s_1(y) = y'$ works, i.e. is an isometry:
+  $B(u+ay, w+by) = B(u, w) + aB(y, w) + bB(u, y) + abB(y,y)
+                 = B'(s(u), s(w)) + al(w) + bl(u) 
+                 = B'(s(u), s(w)) + al'(s(w)) + bl'(s(u))
+                 = B'(u, w) + aB'(y', s(w)) + bB(s(u), y') + abB'(y', y')
+                 = B'(s_1(u+ay), s_2(w+by))$
+  We used $Q(y) = B(y,y) = 0$ and $Q'(y') = 0$ as well.                
+\end{proof}
+
+\begin{theorem}[Witt]
+  Let $(V, Q)$ and $(V', Q')$ isomorphic and 
+  non-degenerate. Then every injective isometry 
+  $s:U\to V'$ from a subspace $U<V$ can be extended to an isometry
+  $V\to V'$
+\end{theorem}
+\begin{proof}
+  Wlog $V = V'$ by using the isomorphism (and $Q = Q'$)
+  By using \ref{1.24} repeatedly, we can assume $U$ to be non-degenerate.
+  Now: induction on $\dim U$.
+
+  $\dim U = 1$: $U = \langle x\rangle$ for a non-isotropic $x$ as $U$ is 
+  non-degenerate. Set $y := s(x)$, then $Q(y) = Q(x)$ by assumption.
+  Now choose $\epsilon=\pm1$ such that $x+\epsilon y$ is non-isotropic:
+  Suppose $x\pm y$ are isotropic, then $Q(x\pm y) = Q(x) + Q(y) \pm 2B(x,y) = 0$  simplifying further $2Q(x) \pm 2B(x,y) = 0$, adding both we get
+  $4Q(x) = 0$, hence $x$ is isotropic with is not possible (assumption on $U$).
+
+  Let $z = x+\epsilon y$ and $H = z^\perp$, so $V = kz \hat\oplus H$.
+  Define $\sigma:V \to V$ via $\sigma(z) = -z$ and $\sigma|_H = \id$.
+
+  By construction $B(z, x-\epsilon y) = B(x+\epsilon y, x-\epsilon y) = Q(x) 
+  +\epsilon B(y, x) - \epsilon B(x, y) - Q(y) = 0$, so
+  $x-\epsilon y\in H$.
+
+  Now $\sigma(x-\epsilon y) = x-\epsilon y$ and $\sigma(x+\epsilon y) = \sigma(z) = -z = -x-\epsilon y$, so $\sigma(x) = 1/2\sigma((x+\epsilon y) + (x-\epsilon y)) = 1/2(-x-\epsilon y + x-\epsilon y) = -\epsilon y$,
+  so $-\epsilon \sigma$ extends $s$ and is an isometry by construction! (On $H$
+  we multiply by $\epsilon^2 = 1$)
+
+  Let $\dim U>1$, decompose $U = U_1\hat\oplus U_2$ with $U_1$, $U_2$ both 
+  non-trivial. By induction $s_1 = s|_{U_1}$ extends to an isometry $\sigma_1$
+  on $V$,
+  setting $s = \sigma_1^{-1}\circ s$ we can thus assume that $s$ is the identity
+  on $U_1$.
+  Therefore $s(U_2) \subseteq U_1^\perp =: V_1$ and $U_2\subseteq V_1$.
+  By induction
+  $s|_{U_2}$ extends to an automorphism $\sigma_2$ of $V_1$.
+
+  Finally, on $V$ define $\sigma$ as the identity on $U_1$ and $\sigma_2\in V_1$.
+\end{proof}
+
+\begin{korollar}
+  Let $U_1$, and $U_2$ be isometric subspaces of the non-degenerate space
+  $(V, Q)$. Then their cothogonal complents are also isometric
+\end{korollar}
+\begin{proof}
+  We have $U_1$ isometric to $U_2$, hence this "extends" to an 
+  injective embedding into the full space. This is then extended to an
+  isometric automorphism. The restriction to the complements then gives
+  the result.
+\end{proof}
+
+\section{Classical Forms}
+\begin{definition}
+  $f\in k[x_1, \ldots, x_n]$ s.th.
+  $$f = \sum a_{i,i}x_i^2 + 2\sum_{i<j}a_{i,j}x_ix_j$$
+  is called a {\em quadratic form}.
+
+  We supplement the matrix via $a_{i,j} = a_{j,i}$ for $j<i$, then
+  $(k^n, f)$ is the quadratic space associated to $f$. $f_1$, and $f_2$
+  are equivalent if the quadratic spaces are
+
+  We write $f_1\sim f_2$ in this case.
+\end{definition}
+
+\begin{remark}
+   \begin{enumerate}
+     \item $f_1 \sim f_2$ iff there is $T\in \Gl(n, k)$ s.th. $f_1(T x) = f_2(x)$
+     \item $f \hat + g = f(x_1, \ldots, x_n) + g(x_{n+1}, \ldots, x_{n+m})$ is
+       a form on $k^{n+m}$, it corresponds to an orthogonal sum.
+     \item $f \hat - g := f\hat +(-g)$
+   \end{enumerate}
+\end{remark}
+
+\begin{definition}
+  $f$ is called hyperbolic iff $f\sim x_1x_2 \sim x_1^2-x_2^2$.
+  We say {\em $f$ represents $a\in k$} iff there is $0\ne x\in k^n$ s.th.
+  $f(x) = a$
+\end{definition}
+
+\begin{proposition}
+  If $f$ is non-degenerate and represents $0$, then $f\sim f_1 \hat + g$
+  for $f_1$ hyperbolic and $g$ non-degenerate. Furthermore, $f$ is surjective
+  in this case.
+\end{proposition}
+
+\begin{korollar}
+  Let $g = g(x_1, \ldots, x_{n-1})$ be non-degenerate and $a\in k^*$ arbitrary.
+  The following are equivalent:
+  \begin{itemize}
+    \item $g$ represents $a$
+    \item $g\sim h \hat + az^2$ where $h$ is a form in $n-2$ variables.
+    \item $f := g\hat - az^2$ represents $0$
+  \end{itemize}
+\end{korollar}
+
+\begin{korollar}
+  Let $f$ be a quadratic form in $n$ variables, then $f\sim \sum a_i x_i^2$
+  (use an orthogonal basis).
+
+  Thus $\rank f$ is the number of non-zero $a_i$ in this representation and
+  $\disc f = \prod a_i$
+\end{korollar}
+
+\begin{korollar}
+  Let $f = g\hat + h$, $f' = g' \hat + h'$, $f$, $f'$ non-degenerate.
+  If $f\sim f'$ and $g\sim g'$ then $h \sim h'$ as well
+\end{korollar}
+
+\begin{korollar}
+  $f$ be any quadratic form, then $f\sim g_1 \hat + \cdots \hat + g_m \hat + h$ where the $g_i$ are hyperbolic and $h$ does not represent $0$.
+  Furthermore, this decomposition is unique up to equivalence.
+\end{korollar}
+
+\section{Forms over finite fields}
+Let $k = \mathbb F_q$ for $\chr k>2$ in this section.
+
+\begin{proposition}\label{1.35}
+  Let $Q$ be a quadratic form of $\rank Q\ge 2$, then $Q$ represent
+  all $a\in k^*$. if $\rank Q\ge 3$ then it is represents $0$
+\end{proposition}
+\begin{proof}
+  Let $a$, $b$, $c\ne 0$ then the equation $ax^2+by^2=c$ has a
+  solution:
+  Let $A := \{ax^2 | x \in k\}$ and $B := \{c-bx^2|x \in k\}$. Then
+  both $A$ and $B$ have $(|k|-1)/2 +1$ elements, so they cannot be
+  disjoint.
+
+  Now any form of rank $2$ is equivalent to $ax^2+by^2$, proving part
+  1, for part 2: $ax^2+by^2+cz^2$ represents zero trivially: take $z=1$
+  and find $a$, $b$ as above.
+\end{proof}
+
+\begin{remark}
+  $\mathbb F_q^*/\mathbb F_q^2 = \{1, a\}$ since $\mathbb F_q^*$ is cyclic.
+\end{remark}
+
+\begin{proposition}
+  Fix $a$ as above (a non-square) and let $f$ be any non-degenerate quadratic
+  form of rank $n$. Then
+  $$f\sim \sum x_i^2\quad\text{or}\quad f\sim ax_1^2 + \sum x_i^2$$
+  depending on $\disc f = 1$ or $a$.
+  (recall: $\disc$ is modulo squares only)
+\end{proposition}
+\begin{proof}
+  Induction: $n=1$: OK
+  
+  Let $n\ge 2$. By \ref{1.35} $f$ represents $1$, so $f \sim x^2 + g$
+  for a non-degenerate form $g$ in $n-1$ variables.
+
+  ($f$ represents $1$ implies there is a vector $x$ of length $1$, this can be
+  used to split the space into $xk$ and $x^\perp$)
+\end{proof}
+
+\begin{korollar}
+  $f$, $g$ non-degenerate forms over $\mathbb F_q$. Then
+  $f\sim g$ iff $\rank f = \rank g$ and $\disc f = \disc g$.
+\end{korollar}
+

@@ -1,0 +1,114 @@
+\message{Document Style by Oliver Petrik} 
+\message{Version 1 as of 16 December 1992}
+%
+\@twosidetrue
+\@mparswitchtrue
+%
+\textheight240mm
+%\textheight250mm
+\textwidth150mm
+\parskip0pt plus3pt
+\parindent0pt
+\marginparwidth22mm
+\marginparsep3mm
+\oddsidemargin4.6mm
+\evensidemargin4.6mm
+\topmargin-21.4mm
+%\addtolength{\voffset}{+17mm}
+\addtolength{\voffset}{+3mm}
+%
+\def\NAme{Kapitel }
+\def\chapter{\clearpage\thispagestyle{empty}\global\@topnum\z@
+             \@afterindenttrue
+             \secdef\@chapter\@schapter}
+\def\@makechapterhead#1{\vspace*{50pt}
+      {\parindent0pt \centering \underbar{\ifnum \c@secnumdepth >\m@ne
+       \LARGE \bf\NAme \thechapter : #1 \fi}
+       \par\nobreak \vskip40pt}}
+\def\@makeschapterhead#1{\vspace*{50pt}
+     {\parindent0pt \centering \underbar{\LARGE\bf #1} \par\nobreak \vskip40pt}}
+%
+\def\section{\@startsection{section}{1}{\z@}{3.5ex plus1.2ex minus.3ex}
+     {2.3ex plus.3ex}{\centering \Large\bf}}
+%
+\def\subsection{\@startsection{subsection}{2}{\z@}{1.5ex plus.2ex minus.1ex} %1.3
+     {1ex plus.2ex}{\large\bf }} %0.5
+%
+\def\subsectionmark#1{} %\def\chaptermark#1{} 
+\newdimen\emptyfoot   \advance\headsep by 0.5\baselineskip
+\emptyfoot=\topmargin  \advance\emptyfoot by1\baselineskip
+ \def\ps@headings{\let\@mkboth=\markboth \topmargin\emptyfoot
+          \def\@evenfoot{} \def\@oddfoot{}
+               \def\@evenhead{\vtop{\hsize\textwidth
+                   \hbox to \textwidth{\bf \thepage \hss \it \leftmark}
+                   \vskip 1pt \hrule}\hss}
+               \def\@oddhead{\vtop{\hsize\textwidth
+                   \hbox to \textwidth{\it \rightmark \hss \bf \thepage}
+                   \vskip 1pt \hrule\vss}\hss}
+          \def\chaptermark##1{\markboth
+            {{\ifnum\c@secnumdepth>\m@ne \NAme \thechapter \quad --- \quad \fi {##1}}}
+            {}}
+          \def\sectionmark##1{\markright{\thesection\ {##1}}}}
+%
+\def\tableofcontents{\chapter*{Inhaltsverzeichnis}
+          \markboth{Inhaltsverzeichnis}{Inhaltsverzeichnis}
+            \@starttoc{toc}}
+%
+\def\appendix{\par
+ \setcounter{chapter}{0}
+\global\def\NAme{Anhang }
+ \def\thechapter{\Alph{chapter}}}
+%
+\renewcommand{\labelenumi}{(\roman{enumi})}
+%
+\pagestyle{headings}
+%
+\def\theindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+\columnseprule \z@
+\columnsep 35pt\twocolumn[\@makeschapterhead{Stichwortverzeichnis}]
+ \@mkboth{Stichwortverzeichnis}{Stichwortverzeichnis}\thispagestyle{empty}
+ \addcontentsline{toc}{chapter}{Stichwortverzeichnis}
+ \addtocontents{lof}{\protect\addvspace{10pt}}
+\addtocontents{lot}{\protect\addvspace{10pt}}
+\parindent\z@
+ \parskip\z@ plus .3pt\relax\let\item\@idxitem}
+%
+\def\see#1#2{{\em siehe\/} #1}
+%
+\def\thebibliography#1{\chapter*{Literaturverzeichnis}
+ \@mkboth{Literaturverzeichnis}{Literaturverzeichnis}\thispagestyle{empty}
+ \addcontentsline{toc}{chapter}{Literaturverzeichnis}
+ \addtocontents{lof}{\protect\addvspace{10pt}}
+ \addtocontents{lot}{\protect\addvspace{10pt}}
+ \list {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+%
+\newenvironment{TheSymbol}{
+     \chapter*{Symbolverzeichnis}
+     \@mkboth{Symbolverzeichnis}{Symbolverzeichnis}
+     \addcontentsline{toc}{chapter}{Symbolverzeichnis}
+     \addtocontents{lof}{\protect\addvspace{10pt}}
+     \addtocontents{lot}{\protect\addvspace{10pt}}
+     \begin{list}{ }{
+     \rightmargin0.5cm 
+     \parsep0.5ex plus0.2ex minus0.1ex
+     \listparindent0pt
+     \labelwidth2.5cm
+     \labelsep0.2cm
+     \leftmargin2.7cm     
+     \itemsep0ex plus0.2ex}}{\end{list}}
+%
+\def\DummyPage{
+  \newpage
+  \ifodd \value{page}
+    { }
+  \else 
+    \thispagestyle{empty}
+    $\phantom{Dummy Page}$
+    \newpage 
+  \fi
+}

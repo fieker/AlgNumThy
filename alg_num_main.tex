@@ -1,0 +1,36 @@
+\documentclass[psamsfonts,12pt]{amsbook}
+\usepackage{amssymb,amscd,color,cf_alg}
+%\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+%\DeclareGraphicsRule{.pdf_t}{pdf}{*}{}
+%\usepackage[all,dvips]{xy}
+%\usepackage[tpic,all]{xy}
+%\CompileMatrices
+%\includeonly {alg_5,alg_6}
+%\includeonly {alg_5,alg_8}
+%\includeonly {alg_8}
+%\includeonly {alg_1,alg_2,alg_3,alg_4,alg_5}
+%\includeonly {alg_4,alg_5}
+\makeindex
+\input ezt_mac.tex    % Macros laden
+\begin{document}
+
+\unitlength3mm
+\pagenumbering{roman}
+
+\input tit.tex  % Titelbild
+
+\tableofcontents    % Inhaltsverzeichnis
+\pagenumbering{arabic}
+\setcounter{chapter}{-1}
+
+\include {alg_num_1}    
+\include {alg_num_2}    
+\begin{appendix}           % Anhang
+%\input ueb.tex
+%\input alg_lit.tex  % Literaturverzeichnis
+%\printindex         % Indexregister
+\end{appendix}
+\end{document}
+
