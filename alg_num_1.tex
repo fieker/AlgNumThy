@@ -219,16 +219,16 @@ contiguous orthogonal bases linking $e_i$ and $f_i$
   Let $0\ne x\in \rad U$ and $l\in\hom(U, k) = U^*$ s.th.
   $l(x) =1$ (since $x\ne 0$ there has to be such a form).
   By \ref{1.7}, since $V$ is non-degenerate and there is a $v\in V$ s.th.
-  $l(x) = B(x, v)$ for all $x \in U$. Set $y = v-1/2Q(v)x$ we get
+  $l(t) = B(t, v)$ for all $t \in U$. Set $y = v-1/2Q(v)x$ we get
   \begin{itemize}
     \item $Q(y) = 0$: $Q(y) = Q(v-1/2Q(v)x) = Q(v) +1/4Q(v)^2Q(x) -Q(v)B(v, x) = 0$ (since $Q(x) = 0$ and $B(v, x) = l(x) = 1$)
     \item $l(t) = B(t, y)$ for all $t\in U$:
       $B(t, y) = B(t, v-1/2Q(v)x) = B(t, v) - 1/2Q(v)B(t, x) = l(t)$
-      (since $B(t, v) = l(t)$ on $U$ and $U$ is isotropic, hence all is zero)
+      (since $B(t, v) = l(t)$ on $U$ and $x \in \rad U$ hence $B(t, x) = 0$)
   \end{itemize}
   Set $U_1 = U \oplus ky$.
 
-  Now let $U' = s(U)$, then $s(x) =: x` \in U'$, $l' := l \circ s^{-1}$
+  Now let $U' = s(U)$, then $s(x) =: x' \in U'$, $l' := l \circ s^{-1}$
   satisfies $l'(x') = l\circ s^{-1}(s(x)) = l(x) = 1$, so \ref{1.7}
   again find $v'$ and then $y'$ s.th. $l'(t) = B(t, y')$.
 
@@ -284,7 +284,7 @@ contiguous orthogonal bases linking $e_i$ and $f_i$
 
 \begin{korollar}
   Let $U_1$, and $U_2$ be isometric subspaces of the non-degenerate space
-  $(V, Q)$. Then their cothogonal complents are also isometric
+  $(V, Q)$. Then their orthogonal complements are also isometric
 \end{korollar}
 \begin{proof}
   We have $U_1$ isometric to $U_2$, hence this "extends" to an 
@@ -301,7 +301,7 @@ contiguous orthogonal bases linking $e_i$ and $f_i$
 
   We supplement the matrix via $a_{i,j} = a_{j,i}$ for $j<i$, then
   $(k^n, f)$ is the quadratic space associated to $f$. $f_1$, and $f_2$
-  are equivalent if the quadratic spaces are
+  are equivalent if the quadratic spaces are.
 
   We write $f_1\sim f_2$ in this case.
 \end{definition}

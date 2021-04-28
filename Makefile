@@ -1,13 +1,13 @@
 all: alg_num.pdf  alg_num_c1c.pdf
 
-alg_num.dvi: alg_num_1.tex alg_num_main.tex alg_num_2.tex
+alg_num.dvi: alg_num_1.tex alg_num_main.tex alg_num_2.tex alg_num_3.tex
 	latex alg_num
 	touch alg_num_main.tex
 
 alg_num.pdf: alg_num.dvi
 	dvipdfm alg_num
 
-alg_num_c1c.dvi: alg_num_1.tex alg_num_main.tex alg_num_2.tex
+alg_num_c1c.dvi: alg_num_1.tex alg_num_main.tex alg_num_2.tex alg_num_3.tex
 	latex alg_num_c1c
 	touch alg_num_main.tex
 

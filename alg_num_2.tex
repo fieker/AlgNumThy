@@ -208,3 +208,488 @@ $$\legendre {-1} n = (-1)^{\epsilon(n)}\quad\text{and}\quad\legendre 2 n = (-1)^
 Computation via Jacobi:
   $$\legendre{29}{43} = \legendre{43}{29} = \legendre{14}{29} = \legendre 2{29}\legendre 7{29} = - \legendre 7{29} = -\legendre{29} 7 = -\legendre 1 7 = -1$$
 \end{remark}
+
+\begin{lemma}
+  Let $(D_n)_n$ be an inverse (or projective) system with limit $D$. If all the
+  $D_n$ are finite and non-empty, then $D$ is non-empty as well.
+\end{lemma}
+\begin{remark}
+  Recall
+  $$D = \{x\in \prod D_n \mid \phi_n(x_n) = x_{n-1}\}$$
+  If the $D_n$ are groups or vector spaces and the $\phi_n$ homomorphisms, then
+  clearly $0 = (0)$ is in $D$, however inverse systems are also considered 
+  in more general situations.
+\end{remark}
+\begin{proof}
+  We distinguish 2 cases: if for all $n$ the maps $D_n\to D_{n-1}$ are
+  surjective, then clearly $D$ is non-empty.
+
+  Set $D_{n, p} = \image D_{n+p} \to D_n$, then, as an image of a non-empty
+  set $D_{n+p}$ this is non-empty. Clearly $D_{n, p+1} \subseteq D_{n, p}$
+  so they form for $n$ fixed, a descending sequence of finite non-empty
+  sets, hence $\cap_p D_{n_p}$ is non-empty and the sequence has to become 
+  stationary. Let $E_n := \cap_p D_{n, p}$ and obviously
+  $\phi_n E_n \subseteq E_{n-1}$, in fact, by construction we have
+  $\phi_n E_n = E_{n-1}$, hence $\phi_n|_{E+n}$ is surjective, thus
+  the projective system has a non-empty limit $E$. Since $E_n \subseteq D_n$,
+  we also have $\lim E_n \subseteq D_n$ proving $D$ to be non-emtpy.
+\end{proof}
+
+\begin{lemma}
+  Let $f_i\in \mathbb Z_p[x_1, \ldots, x_n]$ for $1\le i\le m$. Then the following
+  are equivalent:
+  \begin{enumerate}
+    \item the $f_i$ have a common zero in $\mathbb Z_p^n$
+    \item for all $k$ the $f_i$ have a common zero in $(\mathbb Z/p^k)^n$
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Set $D_k = \{x\in (\mathbb Z/p^k)^n | \forall i: f_i(x) = 0\}$
+  and $D = \{ x\in \mathbb Z_p^n | \forall i: f_i(x) = 0\}$, then
+  the $D_k$ form a projective system with limit $D$. By the lemma above
+  $D$ is non-empty iff this holds for the $D_k$.
+\end{proof}
+Note: the $D$ and $D_k$ here are just sets, so the easy route in the lemma using
+a group or vector space structure to show $0$ is everywhere, does not
+work.
+
+\begin{definition}
+  Let $x\in \mathbb Z_p^n$, then $\|x\|_\infty = \max_i |x_i|_p$. We all
+  $x$ {\em primitive} if $\|x\|_\infty = 1$.
+
+  For $x\in (\mathbb Z/p^k)^n$ we call $x$ primitive if at least one component
+  is not divsible by $p$.
+\end{definition}
+
+\begin{lemma}
+  Let $f_i\in \mathbb Z_p[x_1, \ldots, x_n]$ be homogenous. Then the following are 
+  equivalent:
+  \begin{enumerate}
+    \item the $f_i$ have a common, non-trivial solution in $\mathbb Q_p^n$
+    \item the $f_i$ have a common, non-trivial primitive solution in $\mathbb Z_p^n$
+    \item the $f_i$ have a common, non-trivial primitive solution in 
+      $(\mathbb Z/p^k)^n$ for all $k$
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Use a common denominator to convert between $\mathbb Z_p$ and $\mathbb Q_p$.
+\end{proof}
+
+\begin{lemma}[Newton - 2]\label{newton-2}
+  Let $f\in \mathbb Z_p[t]$ and $a\in \mathbb Z_p$ so that
+  $0\le|f(a)|_p < |f'(a)|_p^2$. Then there is a $b\in \Z_p$ s.th.
+  $f(b) = 0$ and $|a-b|_p\le |f(a)|_p/|f'(a)|_p$, $|f(a)|_p = |f(b)|_p$
+  and $|f'(a)|_p = |f'(b)|_p$
+\end{lemma}
+\begin{proof}
+  Similar to the last version of the Newton lift:
+  Use Taylor to write
+  $$f(x+h) = f(x) + hf'(x) + h^2R(x, h)$$
+  for some $R\in \mathbb Z_p[x, h]$.
+  Apply this for $x=a$ and $h = p^{n-k}y$ to get
+  $$f(a+p^{n-k}y) = f(a) + p^{n-k}y f'(a) + p^{2(n-k)}R(\ldots)$$
+  By assumption $f(a) = p^n a'$, $f'(a) = p^k c$, so if
+  $a' + yc = 0 \bmod p$, then 
+  $$f(a+cp^{n-k}) = 0 \bmod p^{n+1}$$
+\end{proof}
+Note: setting $x_0 = a$, $x_1 = a-f(a)/f'(a)$, $x_2=\ldots$ using the lemma
+repeatedly, we obtain a sequence $x_n$ s.th.
+\begin{itemize}
+  \item $\forall n: |a-x_n|_p \le p^{-m}$ or, equivalently, $a = x_n \bmod p^m$
+  \item $|f(x_n)|_p \le p^{-m-n}$
+  \item $|x_{n+1} - x_n|_p < 1/p$
+\end{itemize}
+So, the $x_n$ form a Cauchy-sequence in $\mathbb Z_p$, hence converge to $x$.
+Clearly $f(x) = 0$.
+
+\begin{theorem}
+  Let $f\in \mathbb Z_p[x_1, \ldots, x_n]$ and $a\in \mathbb Z_p^n$, $j$, $m$, $k>0$ such
+  that 
+  \begin{itemize}
+    \item $0<j\le n$
+    \item $0<2k<m$
+    \item $|f(a)|_p\le p^{-m}$
+    \item $|\frac{\partial f}{\partial x_j}(a)|_p\ge p^{-k}$
+  \end{itemize}
+  Then we can find $b\in\mathbb Z_p^n$ s.th.
+  \begin{itemize}
+    \item $f(b) = 0$
+    \item $|a-b|_p \le p^{j-m}$
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Suppose $m=1$, then using Lemma \ref{newton-2} repeatedly we can find
+  $x\in \mathbb Z_p$ s.th. $f(x) = 0$, $|f'(x)| = |f'(a)| \le p^{-k}$
+  thus the statement holds in this case.
+
+  For $m>1$ define $\tilde f(x) = f(a_1, \ldots, a_{j-1}, x, a_{j+1}, \ldots)$
+  and use the $m=1$ case on $\tilde f$.
+
+\end{proof}
+
+\begin{korollar}
+  Let $p\ne 2$, $f(x) = \sum a_{i,j} x_i x_j$ a quadratic form over $\mathbb Z_p$.
+  If $\det a\in \mathbb Z_p^*$ and $a\ne 0$ s.th. $f(a)\equiv 0 \bmod p$, then $f$
+  represents $0$.
+\end{korollar}
+\begin{proof}
+  If we can show that there is some $j$ s.th
+  $$\frac{\partial f}{\partial x_j}(a) \ne 0 \bmod p$$
+  then we can use the theorem above to find a non-trivial root of $f$
+  (non-trivial: the root will be $=a \bmod p$ and $a\ne 0$.)
+
+  However, 
+  $$\frac{\partial f}{\partial x_k} = 2\sum_j a_{j,k}x_j$$
+  so $\frac{\partial f}{\partial x_k}(a)$ is a linear combination of the
+  rows of the matrix, hence non-zero since the rows are lin. indep. ($\det\ne 0$)
+
+\end{proof}
+
+\begin{korollar}
+  Let $p = 2$, $f(x) = \sum a_{i,j} x_i x_j$ a quadratic form over $\mathbb Z_2$.
+  If $\det a\in \mathbb Z_2^*$ and $a\ne 0$ s.th. $f(a)\equiv 0 \bmod 8$, 
+  and $\partial f/\partial x_j (a) \not\equiv 0 \bmod 4$ for some $j$, then $f$
+  reporesents $0$.
+\end{korollar}
+\begin{proof}
+  Similar to above, but needs the second version of Newton. Details: homework
+\end{proof}
+
+\begin{theorem}
+  Let $V = \{x^{p-1} = 1\mid x\in \mathbb Q_p\}$, then $\mathbb F_p^*\sim V<\mathbb Z_p^*$
+\end{theorem}
+\begin{proof}
+  The polynomial $x^{p-1}-1$ has exactly $p-1$ single roots in $\mathbb F_p = \mathbb Z/n\mathbb Z$, thus the easy Newton lift will find $p-1$ elements
+  in $\mathbb Z_p$ s.th. $x^{p-1} = 1$.
+\end{proof}
+
+\begin{korollar}
+  $\mathbb Q_p^*\sim \mathbb Z \times V \times (1+p\mathbb Z_p)$
+\end{korollar}
+\begin{proof}
+  Let $\omega: \mathbb Z_p^* \to \mathbb F_p^* \to V$ as above.
+  For any $x\in\mathbb Q_p$ we have $xp^{-v_p(x)}\in\mathbb Z_p^*$ and
+  for all $x\in \mathbb Z_p^*: x/\omega(x) = 1 \bmod p$ or,
+  equivalently: $x/\omega(x)\in 1 + p\mathbb Z_p$.
+\end{proof}
+Note:
+\begin{itemize}
+  \item $1+p\mathbb Z_p \le \mathbb Z_p^*$, since
+    $(1+px)(1+py) = (1+p(x+y + pxy))$ is of the same form.
+  \item $1+p\mathbb Z_p$ are called the principal units of $\mathbb Z_p$
+  \item the proof above writes $x\in\mathbb Q_p^*$ uniquely as
+    $$x = p^{v_p(x)} \omega(x p^{-v_p(x)}) (1+py)$$
+    corresonding to the factorisation of the structure.
+\end{itemize}
+
+\begin{korollar}
+  Let $p\ne 2$ $\mathbb Q_p/\mathbb Q_p^2 = \langle p, a\rangle \sim C_2\times C_2$ for
+  any $a\in \mathbb Z_p$ that is not a square modulo $p$.
+\end{korollar}
+\begin{proof}
+  We have $\mathbb Q_p^* = \mathbb Z \times V(=\mathbb F_p^*) \times 1+p\mathbb Z_p$ as a direct product, now
+  $\mathbb Z/2 = \{0, 1\}$, $V/V^2 = \langle a\rangle$ also of size 2 and
+  all $y=1+p\mathbb Z_p$ are squares ($\bmod p$ hence in $\mathbb Z_p$).
+\end{proof}
+
+\begin{korollar}
+  Let $p=2$, then $\mathbb Q_2/\mathbb Q_2^2 = \langle 2, 3, 7\rangle \sim C_2^3$
+\end{korollar}
+\begin{proof}
+  We immediately note that $x\in\mathbb Q_2$ is a square implies $v_2(x) = 2k$,
+  in particular $x = 2^{2k} u$ for some $u\in \mathbb Z_2^*$ that is a square.
+  $u$ is a square iff $u=1\bmod 8$ (Newton shows
+  that this is sufficient, an immediate check shows the neccessity).
+  As a unit: $u = 1, 3, 5, 7\bmod 8$, hence
+  $(\mathbb Z/\mathbb 8)^* = \langle 3, 7\rangle$.
+\end{proof}
+
+{\em Now we fix $k$ as either $\mathbb R$ or $\mathbb Q_p$}
+
+\begin{definition}
+  Let $a$, $b\in k^*$.
+  Define
+  $$(a,b) := \begin{cases} 1 & z^2-ax^2-by^2 \text{ rep. } 0\\
+                           -1 & \text{otherwise}
+  \end{cases}$$
+  called the (local) {\em Hilbert-Symbol}.
+\end{definition}
+
+\begin{remark}
+  Since $(a,b) = (ac^2, bd^2)$ for all $c$, $d\in k^*$, we actually have
+  $$(.,.): k^*/k^2 \times k^*/k^2\to \pm 1$$
+\end{remark}
+
+\begin{proposition}
+  Let $a$, $b\in k^*$, define $k_b := k[t]/t^2-b = k(\sqrt b)$. Then
+  $(a,b) = 1$ iff there is some $\theta \in k_b$ s.th. $N(\theta) = a$
+  (or $a\in N(k_n^*)$)
+\end{proposition}
+\begin{proof}
+  Suppose $b = c^2$ so $k_b = k$, then $(c, 0, 1)$ solves
+  $z^2-ax^2-by^2$. In this case $N$ is trivial as $k_b = k$, so 
+  we are done.
+
+  So now $k_b:k = 2$. For $x = r+s\sqrt b\in k_b$ we have
+  $N(x) = r^2-s^2b$.
+
+  Now if $a\in N(k_b^*)$, then $a = N(r+s\sqrt b) = r^2-s^2b$, 
+  hence $(r, 1, s)$ is a solution.
+
+  If $(r, s, t)$ is a solution, so $r^2-as^2-bt^2= 0$,
+  then $a = (r/s)^2 + (t/s)^2b = N(r/s + t/s\sqrt b)$ is a
+  norm. Here $s\ne 0$ since otherwise $b$ is a square.
+\end{proof}
+
+\begin{proposition}
+  \begin{enumerate} Let $a$, $a'$, $b$, $c\in k^*$, then
+    \item $(a,b) = (b,a)$, $(a, c^2) = 1$
+    \item $(a, -a) = 1$, $(a, 1-a) = 1$
+    \item if $(a,b) = 1$, then $(aa', b) = (a', b)$
+    \item $(a, b) = (a, -ab) = (1, (1-a)b)$
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Tut
+\end{proof}
+
+\begin{lemma}
+  Let $v\in\mathbb Z_p^*$ if $(p, v) = 1$, then we can find
+  $z$, $y\in \mathbb Z_p^*$ and $x\in\mathbb Z_p$ s.th.
+  $$z^2-px^2-vy^2 = 0$$
+\end{lemma}
+\begin{proof}
+  Since we have a solution in $\mathbb Q_p$ we can assume a
+  primitive solution in $\mathbb Z_p$. Now assume that in this solution
+  at least one of $z$ or $y$ is divisible by $p$, ie. $=0\bmod p$.
+  Now $z^2-px^2-vy^2 = z^2-vy^2 \bmod p$, so either
+  $z^2 = 0 \bmod p$ or $y^2 = 0 \bmod p$, but since
+  $v\ne 0 \bmod p$ we get $y=z=0\bmod p$ which now implies $px^2=0\bmod p^2$
+  hence $x=0\bmod p$ contradicting the primtivity.
+\end{proof}
+
+\begin{theorem}
+  For $k=\mathbb R$ we have $(a, b) = -1$ iff $a$, $b<0$.
+  For $k = \mathbb Q_p$, we write $a = p^\alpha u$ and $b=p^\beta v$, then
+ 
+  $$(a,b) = \begin{cases} (-1)^{\alpha\beta \epsilon(p)} {\legendre u p}^\beta {\legendre v p}^\alpha & p\ne 2\\
+      (-1)^{\epsilon(u)\epsilon(v) + \alpha\omega(v)+\beta\omega(u)} & p=2
+  \end{cases}$$
+\end{theorem}
+
+\begin{proof}
+  For $k=\mathbb R$ this is obvious: $z^2-ax^2-by^2 = 0$ is trivial to solve if
+  $a$ or $b$ are non-negative and impossible if both are
+  negative.
+
+
+  Let $k=\mathbb Q_p$, $p\ne 2$. Since we solve quadratic equations, 
+  we can assume $\alpha$ and $\beta$ to be $0$ or $1$ only.
+
+  We have 3 cases:
+  \begin{itemize}
+    \item $\alpha \equiv \beta \equiv 0 \bmod (2)$
+    \item $\alpha \equiv 1$, $\beta \equiv 0 \bmod (2)$
+    \item $\alpha \equiv \beta \equiv 1 \bmod (2)$
+  \end{itemize}
+
+  So, let $\alpha \equiv \beta \equiv 0 \bmod 2$, then we want to show
+  $$(u,v) = 1$$. Modulo $p$, ie. in $\mathbb F_p$ we have a non-trivial solution,
+  since $\disc = uv\ne 0\bmod p$, this lifts to a non-trivial solution
+  in $\mathbb Z_p$, so $(a,b) = (u,v) = 1$.
+
+  Next case: assume $\alpha=1$ and $\beta = 0$, so aim:
+  $$(pu, v) = \legendre v p$$. Using the last case and the rules above:
+  $(u,v) = 1 $ implies $(pu, v) = (p, v)$, so we need to show
+  $(p, v) = \legendre v p$. If $v$ is a square, this is obviously true, so
+  assume $\legendre v p = -1$ (note that $\legendre v p = 1$ iff $v$ is a square
+  $\bmod p$, hence, via Newton, also in $\mathbb Z_p$).
+
+  The previous lemma shows that $z^2-px^2-vy^2$ has no nontrivial solution, since
+  a nontrival solution would have $z$, $y\in \mathbb Z_p^*$, $x\in \mathbb Z_p$,
+  but then $z^2-vy^2=0\bmod p$ hence $v$ is a square (via lifting). By 
+  definition: $(p, v) = -1$.
+
+  The case $\alpha = 0$, $\beta = 1$ is via symmetry the same.
+  For the last case we have $\alpha = \beta = 1$. Aim
+  $$(pu, pv) = (-1)^{(p-1)/2}\legendre u p \legendre v p$$
+  By the rules: 
+  $$(pu, pv) = (pu, -p^2uv) = (pu, -uv)$$.
+  The last case showed
+  $$(pu, -uv) = \legendre {-uv} p = \legendre{-1} p \legendre u p \legendre v p$$
+  The supplementary rules $\legendre{-1} p =(-1)^{(p-1)/2}$
+
+  For $\mathbb Q_2$ we repeat those three cases.
+
+  Case 1: $\alpha = \beta =0$, need to show $(u,v) = 1$ iff $u=1\bmod 4$
+  or $v=1\bmod 4$ and $(u,v) = -1$ otherwise. If $u=1\bmod 4$, then
+  $u=1,5 \bmod 8$. If $u=1\bmod 8$ then $u$ is a square and $(u,v) = 1$, so
+  assume $u=5\bmod 8$. Since $v$ is a unit, we have $v\bmod 8 \in \{1, 3, 5, 7\}$, so $4v = 4\bmod 8$ and $u+4v=1\bmod 8$ so $u+4v = w^2$ and
+  $(w, 1, 2)$ solves $z^2-ux^2-vy^2$, hence $(u,v) = 1$.
+  Now the reverse: if $u=v=-1=3\bmod 4$ and $z^2-ux^2-vy^2=0$
+  with $(z, x, y)$ primtive, then $z^2+x^2+y^2 = 0 \bmod 4$, but
+  all squares are $=1, 0\bmod 4$, so either the solution is not primitive
+  or the sum cannot be $0$.
+
+  Case 2: $\alpha = 1$, $\beta = 0$. Aim $(2u, v) = (-1)^{\epsilon(u)\epsilon(v)+\omega(v)}$. We warm up by showing that
+  $$(2, v) = (-1)^{\omega(v)}$$
+  or, equivalently (using the definition of $\omega$:
+  $$(2, v)=1 \quad\text{iff} v=\pm1\bmod 8$$
+  if $(2, v) = 1$, then, by definition, we can find $x$, $y$, $z$ s.rh.
+  $z^2-2x^2-vy^2 = 0$ and $y$, $z\ne0\bmod 2$ ($y$, $z\in \mathbb Z_2^*$)
+  We always have (for units) $z^2 = y^2 = 1\bmod 8$, so we get
+  $1 - 2x^2-v=0\bmod 8$ of $1-2x^2 = v\bmod 8$. Since $x^2\in\{0, 1, 4\}\bmod 8$
+  we get $v=\pm 1\bmod 8$ as required. Now the reverse: if $v=1\bmod 8$,
+  then $v$ is a square, hence $(2, v) = 1$. If $v=-1\bmod 8$, then
+  $(1,1,1)$ solve $z^2-2x^2-vy^2=0\bmod 8$, but the Newton lifting
+  then produces a solution, so $(2, v) = 1$ as well.
+
+  Next: we show $(2u, v) = (2, v)(u, v)$. At least if $(2, v)=1$ or if 
+  $(u,v) = 1$ this follows from the rules established above. So assume
+  $(2,v) = (u,v) = -1$. By the last (half) case $(2, v) = -1$ iff
+  $v=\pm 3\bmod 8$, the first case $(u,v)=-1$ iff $u, v\ne 1\bmod 4$
+  but then $u, v\ne 1\bmod 8$ as well. In combination thus
+  $v=3\bmod 8$ and $u=3, 7\bmod 8$. Since $3=-5\bmod 8$, and $7=-1\bmod 8$
+  we can wlog assume $u=-1$ $v=3$ or $u=3$, $v=-5$ (no $\bmod 8$ here!!!)
+  (since $v=3=-5\bmod 8$ implies $v/-5 = 1\bmod 8$, $5$ is a unit in $\mathbb Z_2$, so $v/-5$ is a square). But now explicitly:
+  $u=-1, v=3: z^2+2x^2-3y^2$ has solution $(1,1,1)$, giving $(2u, v) = 1$
+  and
+  $u=3, v=-5: z^2-6x^2+5y^2$ has solution $(1, 1, 1)$, giving $(2u, v) = 1$
+  as well.
+
+  Last case: $\alpha = \beta= 1$, we need
+  $$(2u, 2v) = (-1)^{\epsilon(u)\epsilon(v)+\omega(u) + \omega(v)}$$
+  Our rules give
+  $$(2u, 2v) = (2u, -4uv) = (2u, -uv) = (-1)^{\epsilon(u)\epsilon(-uv) + \omega(-uv)}$$
+  Now, finally using the fact that $\epsilon$, $\omega$ are homomorphisms
+  and $\epsilon(-1) = 1$, $\omega(-1)= 0$ and $\epsilon(u)(1+\epsilon(u)) = 0$
+  show the rest.
+\end{proof}
+
+\begin{theorem}
+  The Hilbert symbol is a non-degenerate bilinear form on $k^*/(k^*)^2$
+\end{theorem}
+\begin{proof}
+  The biliniarity follows from the explicit formulae in the last theorem
+  and the fact that $\omega$, $\epsilon$ are homomorphisms and the Legendre
+  symbol is multiplicative, for $p\ne 2$:
+  \begin{eqnarray*}
+    (ab, c) &=& (-1)^{(\alpha + \beta)\gamma\epsilon(p)} 
+       {\legendre{uv} p}^\gamma {\legendre w p}^{\alpha + \beta} \\
+       = (-1)^{\alpha\gamma\epsilon(p)} (-1)^{\beta\gamma\epsilon(p)} 
+         {\legendre u p}^\gamma {\legendre v p}^\gamma {\legendre w p}^\alpha
+         {\legendre w p}^\beta\\
+       = (a, c)(b, c)  
+  \end{eqnarray*}
+
+  Now: $k^*/k^2$ is an $\mathbb F_2$ vectorspace (we saw that, as a group
+  we get $C_2$ for $k=\mathbb R$, $C_2\times C_2$ for $p\ne 2$ and $C_2\times C_2\times C_2$ for $p=2$. All of these are $\mathbb F_2$ spaces as well.)
+  Furthermore, $(.,.)$ is trivial ($=1$) on squares, so 
+  $$(.,.): k^*/k^2 \times k^*/k^2\to(\pm1, *) = (\mathbb F_2, +)$$
+  is well defined.
+
+  Remains: the non-degeneracy:
+  For $a\ne 1$ we need to find $b$ s.th. $(a,b)=-1$.
+  For $p\ne 2$ we know $k^*/k^2 = \{1, a, p, ap\}$ $a$ a non-square means
+  $\legendre a p = -1$, then choosing $b = a, p, a$ for $a=a, p, ap$
+  works.
+
+  For $p=2$ similar: we have the group explicitly.
+\end{proof}
+
+\begin{remark}
+  We have 
+  $k^* : N(k_b^*) = 2$ if $b$ is not a square as well as
+  $k_b:k = 2$. This holds for all abelian local fields and is a core results
+  of class field theory. Our results show this for $k=\mathbb Q_p$,
+  but it holds more general. This, on the other hand, implies the
+  multiplicativelty of the Hilbert symbol, and thus serves to establish
+  this in general.
+\end{remark}
+
+\begin{remark}
+  If we fix a basis for $k^*/k^2$, we can compute the Gram matrices:
+  $k = \mathbb R$, basis $\{-1\}$ and matrix $(1)$,
+  $k=\mathbb Q_p$, $p\ne 2$, basis is $\{p, a\}$ for some $a$ s.th. $\legendre a p = -1$, then we haev two cases $p=1\bmod 4$ or $p=3\bmod 4$ with matrices
+  $\begin{pmatrix} 1 & 1\\ 1 & 0\end{pmatrix}$ and
+  $\begin{pmatrix} 0 & 1\\ 1 & 0\end{pmatrix}$.
+      For $p=2$ with basis $\{2, -1, 5\}$ we get
+      $\begin{bmatrix} 0&0&1\\0&1&0\\1&0&0\end{bmatrix}$.
+\end{remark}
+
+Now we need to study things more globally...
+
+\begin{definition}
+  Let $a$, $b\in\mathbb Q^*$ and $p$ a prime. Then
+  $$(a,b)_p := (a \in\mathbb Q_p, b \in \mathbb Q_p)$$
+  For convenience, $(a, b)_\infty$ is the Hilbert symbol for $\mathbb R$
+  and $\infty \in\mathbb P$, the set of primes.
+\end{definition}
+
+\begin{theorem}{Hilbert}
+  Let $a$, $b\in \mathbb Q^*$, then
+  \begin{enumerate}
+    \item for all but finitely many $p\in\mathbb P$ we have $(a, b)_p = 1$.
+    \item $\prod_{p\in\mathbb P} (a,b)_p = 1$, here the product includes
+      $\infty$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Since the Hilbert symbols is bilinear, it is sufficient to to show this
+  for $a$, $b\in\{-1, p\}$.
+
+  $a=b=-1$, then $(-1, -1)_\infty = -1$, $(-1, -1)_p = 1$ and $(-1, -1)_2 = 1$
+  hence the product is $1$.
+
+  $a=-1$, $b=l\in \mathbb P$: $l=2$, then $(-1, 2)_p = 1$ via the formula and
+  the explict $\legendre 2 p$. If $l\ne 2$, then $(-1, l)_2 = (-1, l)_l = (-1)^{\epsilon(l)}$, so the product is $1$. Furthermote $(-1, l)_p = 1$ otherwise.
+
+  $a=l$, $b=l'$. If $l=l'$, then $(l, l')_p = (-1, l)_p$ which was already done.
+  If $l\ne l'$ and $' = 2$, then $(l, 2)_p = 1$ for $p\ne 2, l$ and
+  $(l, 2)_2 = (-1)`{\omega(l)}$, $(l, 2)_l = \legendre 2 p = (-1)^{\omega(l)}$
+  If $l\ne l'$ and none of them is $2$, then $(l, l')_p = 1$ for $p\ne 2, l, l'$
+  and $(l, l')_2 = (-1)^{\epsilon(l)\epsilon(l')}$, 
+  $(l, l')_l = \legendre {l'} l$ and
+  $(l, l')_{l'} = \legendre l {l'}$, usign quadratic reciprocity then finishes.
+\end{proof}
+
+\begin{remark}
+  The product formula is essentially equivalentl to the quadratic reciprocity
+  however, suitably phrased is valid not only for $\mathbb Q$ but for all
+  number fields.
+\end{remark}
+
+\begin{lemma}
+  Let $S\subset \mathbb P$ be finite. Then $\mathbb Q$ is dense in $\prod_{s\in S} \mathbb Q_s$.
+  Equivelently: for all $a_p\in \mathbb Q_p$, $\varepsilon_p>0$ we can find some 
+  $a\in\mathbb Q$, s.th. $\forall p\in \mathbb S: |a-a_p|_p \le \varepsilon_p$ .
+\end{lemma}
+\begin{proof}
+  First assume $\infty \not\in S$. Since $S$ is finite, we can find
+  $d\in \mathbb Z$, s.th. $da_p\in \mathbb Z_p$ for all $s\in S$.
+  Furthermore, we assume $\varepsilon_p =p^{k_p} < 1$ as well. Then
+  $|a-a_p|_p \le \varepsilon_p$ is equivalent to 
+  $|da-da_p|_p \le |d|_p\varepsilon_p$ and thus to
+  $da=da_p \bmod p^{-k_p+v_p(d)}$, so $da$ can found using
+  classical chinese remaindering.
+
+  Now, assume $\infty\in S$, then we take a prime $l\not\in S$, then
+  $\{a/l^n \mid a\in \mathbb Z, n>0\}$ is dense in $\mathbb R$:
+  For $r\in \mathbb R$ and $\epsilon <0$, find $n$ s.th. $l^{-n} < \epsilon$, 
+  then $a = \lfloor rl^n\rfloor$ should do.
+
+  To come back, find $a/d$ s.th. $|a -a_p|_p < \varepsilon_p$ and
+  a number $q/l^n$ s.th. $|a - a_\infty +q/l^n\prod_{\infty \ne p \in S}  p^N | \le \varepsilon_\infty$
+  for some $N$ s.th. $p^{-N} < \varepsilon_p$ for all $p$.
+  Then $a+q/l^n\prod_{\infty \ne p \in S}  p^N$ works.
+  ($v_p(a-a_p)$ is not changed as $N$ is too large)
+\end{proof}
+
+\begin{lemma}[Dirichlet: Primes in arithmetic progressions]
+  Let $a$ and $m$ be coprime integers, then
+  $$|\{p\in \mathbb P \mid p=a\bmod m\}| = \infty$$
+\end{lemma}
+(In fact more is known, but this is too hard for us here, this follows
+from analytic number theory and takes probably 2 months)
+
+
